@@ -113,8 +113,8 @@ module.exports = function(grunt) {
 			}
 		},
 		concurrent: {
-			default: ['nodemon', 'watch'],
-			debug: ['nodemon', 'watch', 'node-inspector'],
+			default: ['pm2', 'watch'],
+			debug: ['pm2', 'watch', 'node-inspector'],
 			options: {
 				logConcurrentOutput: true,
 				limit: 10
@@ -156,6 +156,14 @@ module.exports = function(grunt) {
 		grunt.config.set('applicationJavaScriptFiles', config.assets.js);
 		grunt.config.set('applicationCSSFiles', config.assets.css);
 	});
+
+    // Register pm2 watch task
+    grunt.registerTask('pm2', function() {
+        grunt.util.spawn({
+            cmd: 'pm2',
+            args: ['start', '--watch', 'server.js']
+        });
+    });
 
 	// Default task(s).
 	grunt.registerTask('default', ['lint', 'concurrent:default']);
