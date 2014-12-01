@@ -25,7 +25,7 @@ angular.module('post').provider('moduleRoutes', function ModuleRoutesProvider($s
 
     this.$get = function() {
         return {
-            states: _this.statesData
+            states: this.statesData
         }
     }
 });
